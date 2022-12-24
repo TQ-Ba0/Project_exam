@@ -6,16 +6,15 @@ import matplotlib.pyplot as plt
 st.set_page_config(
     page_title="Subject"
 )
-
+#Introduction
 img = Image.open('images/Subject.png')
 st.image(img,use_column_width=True)
-st.sidebar.header('User Input Features')
 st.title("Subject")
-selected_year = st.sidebar.selectbox('Year',list(reversed(range(2019,2021))))
 st.markdown( """
-    On this page you can see the statistics of each subject and each year by choice
+    On this page you can see spectrum and comments of each subject and in year by choice.
     """
 )
+
 @st.cache
 def load_data(year):
     path_file='diemthi'+str(year)+'.csv'
@@ -24,14 +23,33 @@ def load_data(year):
     df.drop(df.columns[[0]], axis=1, inplace=True)
     return df
 
-select = load_data(selected_year)
-sort_columns = np.array(select.columns)
-select_subject = st.sidebar.multiselect('Subject',sort_columns,sort_columns)
+#sidebar
+st.sidebar.header('User Input Features')
+selected_year = st.sidebar.selectbox('Year',list(reversed(range(2019,2021))))
+#repare data
+df = load_data(selected_year)
+sort_columns = np.array(df.columns)[:-1]
+select_subjects = st.sidebar.multiselect('Subject',sort_columns,sort_columns)
 
-st.write('Data Dimension: ' + str(select.shape[0]) + ' rows and ' + str(select.shape[1]) + ' columns')
-df_exam = select[select_subject]
-st.markdown("## Display Data type of DataFrame")
-
+st.markdown("# Our Data Set")
+df_exam = df[select_subjects+['sbd']]
 st.dataframe(df_exam)
 
-# st.dataframe(select)
+@st.cache
+def visualize_spectrum(subject):
+    plt.figure(figsize=(25,12))
+    plt.title(f"Spectrum of {subject}")
+
+    t = plt.hist(df[subject],bins=np.round(np.arange(0, 10.1, 0.2),1),rwidth=0.5)
+    hist, edges = t[0],t[1]
+
+    plt.xticks(edges)
+    plt.yticks(np.arange(0, max(hist)+1, 1000))
+
+    plt.xlabel('scores')
+    plt.ylabel('number of students')
+
+    return plt
+
+for subject in select_subjects:
+    st.pyplot(visualize_spectrum(subject))
