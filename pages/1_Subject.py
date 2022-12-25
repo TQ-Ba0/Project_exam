@@ -15,13 +15,13 @@ st.markdown( """
     """
 )
 
-@st.cache
+# @st.cache
 def load_data(year):
     path_file='diemthi'+str(year)+'.csv'
     temp = pd.read_csv(path_file)
     df = pd.DataFrame(temp)
     df.drop(df.columns[[0]], axis=1, inplace=True)
-    return df
+    return df.round(2)
 
 #sidebar
 st.sidebar.header('User Input Features')
@@ -35,7 +35,6 @@ st.markdown("# Our Data Set")
 df_exam = df[select_subjects+['sbd']]
 st.dataframe(df_exam)
 
-@st.cache
 def visualize_spectrum(subject):
     plt.figure(figsize=(25,12))
     plt.title(f"Spectrum of {subject}")
@@ -52,4 +51,6 @@ def visualize_spectrum(subject):
     return plt
 
 for subject in select_subjects:
-    st.pyplot(visualize_spectrum(subject))
+    if subject != 'Ma_mon_ngoai_ngu':
+        st.write(f"Spectrum of {subject}")
+        st.pyplot(visualize_spectrum(subject))

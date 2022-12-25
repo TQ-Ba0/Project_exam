@@ -21,20 +21,24 @@ selected_year = st.sidebar.selectbox('Year',list(reversed(range(2019,2021))))
 #repare data
 path_file='diemthi'+str(selected_year)+'.csv'
 temp = pd.read_csv(path_file)
-df = pd.DataFrame(temp)
+df = pd.DataFrame(temp).round(decimals=2)
 df.drop(df.columns[[0]], axis=1, inplace=True)
-
+#print df
 st.markdown("# Our Data Set")
 st.dataframe(df)
 
+
+#
 st.markdown("# Data Explorations")
 df_ex = pd.DataFrame([df.shape[0],df.shape[1],df.duplicated().sum()],
     index=['Rows','Columns','Duplicated Rows'], columns=['Quantity'])
 st.dataframe(df_ex)
 
+
 st.markdown("## Data Types")
-dtypes=pd.DataFrame([df.dtypes]).astype(str)
-st.dataframe(dtypes)
+dtypes=pd.DataFrame([df.dtypes])
+st.dataframe(dtypes.astype(str))
+
 
 st.markdown("## Numeric columns")
 nume_col_list = list(df.select_dtypes(include='float64'))
@@ -45,6 +49,7 @@ df1 = pd.DataFrame([
 df2 = df[nume_col_list].describe()
 nume_col_profiles_df = np.round(pd.concat([df1, df2], axis=0),2)
 st.dataframe(nume_col_profiles_df.astype(str))
+#comment
 st.markdown("""
     `Are they abnormal?`
 
@@ -54,6 +59,8 @@ st.markdown("""
     - Literatures is the only subject that does not have a maximum score.
     """)
 
+
+#
 st.markdown("## Further distribution for Numeric columns")
 nume_df = df[nume_col_list]
 further_col_profiles_df = pd.DataFrame([
@@ -63,6 +70,8 @@ further_col_profiles_df = pd.DataFrame([
     , index=["10 scores","paralysis scores","below_avg"])
 st.dataframe(further_col_profiles_df.astype(str))
 
+
+#
 st.markdown("## Categorical columns")
 cate_df = df[['sbd', 'Ma_mon_ngoai_ngu']]
 cate_col_profiles_df = pd.DataFrame([
@@ -71,6 +80,7 @@ cate_col_profiles_df = pd.DataFrame([
     cate_df.apply(lambda x: pd.unique(x.dropna()))]
     , index=["missing_ratio","num_diff_vals","diff_vals"])
 st.dataframe(cate_col_profiles_df.astype(str))
+#comment
 st.markdown("""
     `Are they abnormal?`
 
@@ -78,6 +88,8 @@ st.markdown("""
     - There are 6 types of foreign languages that the contestants participated in.
     """)
 
+
+#
 st.markdown("## Number of contestants participated in each 'Ma Mon Ngoai Ngu'")
 num_each_NgoaiNgu = df[['sbd', 'Ma_mon_ngoai_ngu']].groupby('Ma_mon_ngoai_ngu').count()
 num_each_NgoaiNgu.rename(columns = {'sbd':'Quantity'}, inplace = True)

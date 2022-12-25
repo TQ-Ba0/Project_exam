@@ -63,8 +63,8 @@ st.markdown(
     - The Website's designed by 4 people:
         - Trần Quốc Bảo - 20127449
         - Hồ Đăng Cao - 20127452
-        - Đỗ Đức Duy - 20127479
-        - Ngô Hữu Nhật Thanh - 20127
+        - Đỗ Đức Duy - 20127476
+        - Ngô Hữu Nhật Thanh - 20127327
 
 """
 )

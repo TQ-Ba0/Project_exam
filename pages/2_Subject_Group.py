@@ -20,24 +20,25 @@ Groups = {'A00':['Toan','Li','Hoa']
         ,'C00':['Van','Su','Dia']
         ,'D01':['Van','Toan','Ngoai_ngu','N1']}#
 
-@st.cache
+# @st.cache
 def load_data(year):
     path_file='diemthi'+str(year)+'.csv'
     temp = pd.read_csv(path_file)
     df = pd.DataFrame(temp)
     df.drop(df.columns[[0]], axis=1, inplace=True)
-    return df
+    return df.round(decimals=2)
 
 #sidebar
 st.sidebar.header('User Input Features')
 selected_year = st.sidebar.selectbox('Year',list(reversed(range(2019,2021))))
+selected_groups = st.sidebar.multiselect('Subject',Groups.keys(),Groups.keys())
+
 #repare data
 df = load_data(selected_year)
-selected_groups = st.sidebar.multiselect('Subject',Groups.keys(),Groups.keys())
 
 st.markdown("# Our Data Set")
 
-@st.cache
+# @st.cache
 def visualize_spectrum(subject, df=df):
     plt.figure(figsize=(25,12))
     plt.title(f"Spectrum of {subject}")
@@ -53,7 +54,7 @@ def visualize_spectrum(subject, df=df):
 
     return plt
 
-@st.cache
+# @st.cache
 def get_df_group(groupName):
     subjects = Groups[groupName][:3]
     language = Groups[groupName][-1] #
@@ -61,11 +62,12 @@ def get_df_group(groupName):
     score_list = df[df['Ma_mon_ngoai_ngu'] == language] if language in df['Ma_mon_ngoai_ngu'] else df #
     score_list = score_list[subjects].dropna()
 
-    score_list = pd.concat([score_list,score_list.sum(axis=1)], axis=1)
+    score_list = pd.concat([score_list,score_list.sum(axis=1)], axis=1).reset_index().drop('index', axis=1)
     score_list.rename(columns = {0:f'Sum {groupName}'}, inplace = True)
+    
     return score_list
 
-for subject in selected_groups:
-    df_group = get_df_group('A00')
+for group in selected_groups:
+    df_group = get_df_group(group)
     st.dataframe(df_group)
-    st.pyplot(visualize_spectrum('Sum A00', df_group))
+    st.pyplot(visualize_spectrum(f'Sum {group}', df_group))
