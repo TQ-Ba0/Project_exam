@@ -48,7 +48,7 @@ def visualize_spectrum(subject):
 def point_structure_in_range(subject):
     plt.figure(figsize=(25,12))
     plt.title(f"Percent of point in range of {subject}")
-    t = plt.hist(df[subject],bins=np.round(np.arange(pointFrom,pointTo, 0.2),1),rwidth=0.5)
+    t = plt.hist(df[subject],bins=np.round(np.arange(pointFrom,pointTo, 0.5),1),rwidth=0.5)
     res = dict(map(lambda i,j : (i,j) , t[1],t[0]))
     # keys=res.keys()
     # values=res.values()
