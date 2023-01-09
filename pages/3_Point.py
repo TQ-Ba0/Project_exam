@@ -5,14 +5,14 @@ import numpy as np
 import matplotlib.pyplot as plt
 import plotly.express as px
 st.set_page_config(
-    page_title="Subject"
+    page_title="Students"
 )
 #Introduction
 img = Image.open('images/Subject.png')
 st.image(img,use_column_width=True)
-st.title("Subject")
+st.title("Students")
 st.markdown( """
-    On this page you can see spectrum and comments of each subject and in year by choice.
+    On this page you can see structure points in range each subject and in year by choice.
     """
 )
 
