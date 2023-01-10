@@ -9,14 +9,14 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 st.set_page_config(
-    page_title = "Predict model"
+    page_title = "Predictive Modeling"
 )
 
 # Introduction
 img = Image.open('images/Subject.png')
 st.image(img,use_column_width=True)
 
-st.title("Predict model")
+st.title("Predictive Modeling")
 st.markdown( """
     On this page you see that, we try to train a multi linear regression model for predict score of subject by another 
     subjects in group of that subject.
@@ -120,13 +120,13 @@ predictGroup = {'A00':['Toan','Li','Hoa']
 
 #sidebar
 st.sidebar.header('User Input Features')
-selected_year = st.sidebar.selectbox('Year for prediction',list(reversed(range(2019,2021))))
-selected_group = st.sidebar.selectbox('Group for prediction',predictGroup.keys())
+selected_year = st.sidebar.selectbox('Year for predicting',list(reversed(range(2019,2021))))
+selected_group = st.sidebar.selectbox('Group for predicting',predictGroup.keys())
 if selected_group == 'D01':
     predictSubject = predictGroup[selected_group][:-1]
 else:
     predictSubject = predictGroup[selected_group]
-selected_subject = st.sidebar.selectbox('Subject for prediction',predictSubject)
+selected_subject = st.sidebar.selectbox('Subject for predicting',predictSubject)
 #
 
 df = load_data(selected_year)
