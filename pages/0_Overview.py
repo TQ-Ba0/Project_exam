@@ -28,7 +28,46 @@ st.markdown("# Our Data Set")
 st.markdown(f"## Score of all subjects in year {selected_year}.")
 
 st.dataframe(df)
+st.markdown(
+        """
+        ### What do the columns in data mean?
+        The dataset includes the student's identification number and the corresponding score of that student:
 
+        sbd - Candidate number
+
+        Van - Literature score
+
+        Toan - Mathematics score
+
+        Ma_mon_ngoai_ngu - Foreign language code
+
+        Ngoai_ngu - Foreign language score
+
+        - N1: English
+
+        - N2: Russian
+
+        - N3: French
+
+        - N4: Chinese
+
+        - N5: German
+
+        - N6: Japanese
+
+        Li - Physics score
+
+        Hoa - Chemistry score
+
+        Sinh - Biology score
+
+        Su - History score
+
+        Dia - Geography score
+
+        GDCD - Civics score
+    """
+    )
 
 #
 st.markdown("# Data Explorations")
