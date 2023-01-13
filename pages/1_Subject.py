@@ -15,7 +15,7 @@ st.markdown( """
     """
 )
 
-# @st.cache
+@st.cache
 def load_data(year):
     path_file='diemthi'+str(year)+'.csv'
     temp = pd.read_csv(path_file)

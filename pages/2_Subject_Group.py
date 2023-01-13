@@ -20,7 +20,7 @@ Groups = {'A00':['Toan','Li','Hoa']
         ,'C00':['Van','Su','Dia']
         ,'D01':['Van','Toan','Ngoai_ngu','N1']}#
 
-# @st.cache
+@st.cache
 def load_data(year):
     path_file='diemthi'+str(year)+'.csv'
     temp = pd.read_csv(path_file)
