@@ -13,7 +13,13 @@ img = Image.open('images/Subject.png')
 st.image(img,use_column_width=True)
 st.title("Subject")
 st.markdown( """
-    On this page you can see spectrum and comments of each subject and in year by choice.
+    On this page, we can see spectrum and comments of each subject and in year by choice.
+
+    Looking at the score spectrum, we can understand the student's learning situation of each year as well as the easy / difficult level of the high school exam that year. Partially assess the quality of education as well as the quality of students.
+
+    The score spectrum also shows that this year's candidates are strong in which exams. In addition, through the score spectrum, we will also be able to assess whether that year's exam is standardized or not.
+
+    Universities base on the score spectrum to develop appropriate benchmarks.
     """
 )
 
