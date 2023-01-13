@@ -71,3 +71,5 @@ for group in selected_groups:
     df_group = get_df_group(group)
     st.dataframe(df_group)
     st.pyplot(visualize_spectrum(f'Sum {group}', df_group))
+
+    

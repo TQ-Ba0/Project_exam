@@ -34,12 +34,11 @@ select_subjects = st.sidebar.multiselect('Subject',sort_columns,sort_columns)
 st.markdown("# Our Data Set")
 df_exam = df[select_subjects+['sbd']]
 st.dataframe(df_exam)
-
 def visualize_spectrum(subject):
     plt.figure(figsize=(25,12))
     plt.title(f"Spectrum of {subject}")
 
-    t = plt.hist(df[subject],bins=np.round(np.arange(0, 10.1, 0.2),1),rwidth=0.5)
+    t = plt.hist(df[subject],bins=np.round(np.arange(0,10.1, 0.2),1),rwidth=0.5)
     hist, edges = t[0],t[1]
 
     plt.xticks(edges)
