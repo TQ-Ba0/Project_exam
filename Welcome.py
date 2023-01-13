@@ -17,44 +17,6 @@ st.markdown(
     ### Subject
     This is a dataset about test scores that candidates achieved in the college entrance examination for the school year 2019 to 2021 in Vietnam.
     You can view statistics by subject and exam block.
-
-    ### Content
-    The dataset includes the student's identification number and the corresponding score of that student:
-
-    sbd - Candidate number
-
-    Van - Literature score
-
-    Toan - Mathematics score
-
-    Ma_mon_ngoai_ngu - Foreign language code
-
-    Ngoai_ngu - Foreign language score
-
-    - N1: English
-
-    - N2: Russian
-
-    - N3: French
-
-    - N4: Chinese
-
-    - N5: German
-
-    - N6: Japanese
-
-    Li - Physics score
-
-    Hoa - Chemistry score
-
-    Sinh - Biology score
-
-    Su - History score
-
-    Dia - Geography score
-
-    GDCD - Civics score
-
     ### Author's words
     Hope this dataset helps the data analysis community.
 
