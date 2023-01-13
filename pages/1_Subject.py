@@ -43,7 +43,7 @@ def visualize_spectrum(subject):
     plt.figure(figsize=(25,12))
     plt.title(f"Spectrum of {subject}")
 
-    t = plt.hist(df[subject],bins=np.round(np.arange(pointFrom,pointTo, 0.2),1),rwidth=0.5)
+    t = plt.hist(df[subject],bins=np.round(np.arange(pointFrom, pointTo+0.1, 0.2),1),rwidth=0.5)
     hist, edges = t[0],t[1]
 
     plt.xticks(edges)
@@ -52,8 +52,8 @@ def visualize_spectrum(subject):
     plt.xlabel('scores')
     plt.ylabel('number of students')
 
-    #pie chart
-    t = np.histogram(df[subject],bins=np.round(np.arange(pointFrom,pointTo, 0.5),1))
+    #pie chart for %
+    t = np.histogram(df[subject],bins=np.round(np.arange(pointFrom, pointTo+0.1, 0.5),1))
     res = dict(map(lambda i,j : (i,j), t[1],t[0]))
     res = pd.DataFrame.from_dict(res,orient='index')
     res = res.reset_index()
