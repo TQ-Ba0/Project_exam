@@ -70,6 +70,7 @@ def get_df_group(groupName):
 for group in selected_groups:
     df_group = get_df_group(group)
     st.dataframe(df_group)
+    st.write(f"Spectrum of {group}")
     st.pyplot(visualize_spectrum(f'Sum {group}', df_group))
 
     

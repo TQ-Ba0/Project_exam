@@ -1,8 +1,10 @@
 import streamlit as st
 import pandas as pd
+import numpy as np
 from PIL import Image
 import numpy as np
 import matplotlib.pyplot as plt
+import plotly.express as px
 st.set_page_config(
     page_title="Subject"
 )
@@ -31,14 +33,17 @@ df = load_data(selected_year)
 sort_columns = np.array(df.columns)[:-1]
 select_subjects = st.sidebar.multiselect('Subject',sort_columns,sort_columns)
 
-st.markdown("# Our Data Set")
-df_exam = df[select_subjects+['sbd']]
-st.dataframe(df_exam)
+select_point = st.sidebar.slider(
+    'Select a range of point',
+    0.0, 10.0,(0.0,10.0))
+pointFrom, pointTo = select_point
+
 def visualize_spectrum(subject):
+    #histogram
     plt.figure(figsize=(25,12))
     plt.title(f"Spectrum of {subject}")
 
-    t = plt.hist(df[subject],bins=np.round(np.arange(0,10.1, 0.2),1),rwidth=0.5)
+    t = plt.hist(df[subject],bins=np.round(np.arange(pointFrom,pointTo, 0.2),1),rwidth=0.5)
     hist, edges = t[0],t[1]
 
     plt.xticks(edges)
@@ -47,9 +52,19 @@ def visualize_spectrum(subject):
     plt.xlabel('scores')
     plt.ylabel('number of students')
 
-    return plt
+    #pie chart
+    t = np.histogram(df[subject],bins=np.round(np.arange(pointFrom,pointTo, 0.5),1))
+    res = dict(map(lambda i,j : (i,j), t[1],t[0]))
+    res = pd.DataFrame.from_dict(res,orient='index')
+    res = res.reset_index()
+    res.columns=['Points','Numbers of student']
+    fig = px.pie(res,values='Numbers of student',names='Points')
+
+    return plt, fig
 
 for subject in select_subjects:
     if subject != 'Ma_mon_ngoai_ngu':
         st.write(f"Spectrum of {subject}")
-        st.pyplot(visualize_spectrum(subject))
+        st.pyplot(visualize_spectrum(subject)[0])
+        st.write(f"Point structure in range of {subject}")
+        st.write(visualize_spectrum(subject)[1])

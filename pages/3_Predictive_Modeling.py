@@ -14,7 +14,7 @@ st.set_page_config(
 )
 
 # Introduction
-img = Image.open('images/Subject.png')
+img = Image.open('images/Model.jpg')
 st.image(img,use_column_width=True)
 
 st.title("Predictive Modeling")
@@ -130,9 +130,7 @@ selected_subject = st.sidebar.selectbox('Subject for predicting',predictSubject)
 #
 
 df = load_data(selected_year)
-st.markdown(f"#### Score of all subjects in year {selected_year}.")
 
-st.dataframe(df)
 groupWantToPredict = selected_group
 dataForModel = getDataByGroup(df,groupWantToPredict,predictGroup)
 st.markdown(f"#### Score of group {selected_group}.")
@@ -149,9 +147,3 @@ st.dataframe(eva)
 st.markdown(f"##### Visualize the result of predicting {subjectWantToPredict} score.")
 st.pyplot(visualizationDataLine(y_test,y_preds,subjectWantToPredict))
 st.pyplot(visualizationDataHis(y_test,y_preds,subjectWantToPredict)) 
-
-
-
-
-
-

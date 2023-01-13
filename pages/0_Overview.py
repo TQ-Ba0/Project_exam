@@ -7,7 +7,7 @@ st.set_page_config(
     page_title="Overview"
 )
 #Introduction
-img = Image.open('images/Subject.png')
+img = Image.open('images/Overview.jpg')
 st.image(img,use_column_width=True)
 st.title("Overview")
 st.markdown( """
@@ -25,6 +25,8 @@ df = pd.DataFrame(temp).round(decimals=2)
 df.drop(df.columns[[0]], axis=1, inplace=True)
 #print df
 st.markdown("# Our Data Set")
+st.markdown(f"## Score of all subjects in year {selected_year}.")
+
 st.dataframe(df)
 
 

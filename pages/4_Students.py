@@ -5,12 +5,12 @@ import numpy as np
 import matplotlib.pyplot as plt
 import plotly.express as px
 st.set_page_config(
-    page_title="Subject"
+    page_title="Student"
 )
 #Introduction
-img = Image.open('images/Subject.png')
+img = Image.open('images/Student.jpg')
 st.image(img,use_column_width=True)
-st.title("Subject")
+st.title("Number of Student in Subjects")
 st.markdown( """
     On this page you can see compare of each subject that student participate in some year by choice.
     """
@@ -33,16 +33,14 @@ sort_columns = np.array(df.columns)[:-1]
 select_subjects = st.sidebar.multiselect('Subject',sort_columns,sort_columns)
 
 st.markdown("# Our Data Set")
-df_exam = df[select_subjects+['sbd']]
-st.dataframe(df_exam)
-totalStudent , totalColumns = df_exam.shape
-numberStudent=df_exam.drop(['sbd'],axis=1).count().reset_index()
+
+totalStudent, totalColumns = df.shape
+numberStudent=df.count().reset_index()
 numberStudent.columns=['Subject','Number of student']
 st.write(numberStudent)
 def count_number_student(subject):
     students_num=df[subject].count()
-    key=f"Student in {subject}"
-    keys=['Total_student',key]
+    keys=['Total_student',f"Student in {subject}"]
     values=[totalStudent,students_num]
     number_Student = dict(zip(keys, values))
     number_Student = pd.DataFrame.from_dict(number_Student,orient='index')
